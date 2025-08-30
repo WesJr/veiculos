@@ -1,0 +1,30 @@
+
+services:
+  app:
+    build: .
+    container_name: app_veiculos
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/veiculos
+      SPRING_DATASOURCE_USERNAME: veiculos
+      SPRING_DATASOURCE_PASSWORD: veiculos
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: veiculos
+      POSTGRES_PASSWORD: veiculos
+      POSTGRES_DB: veiculos 
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
