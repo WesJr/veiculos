@@ -21,6 +21,11 @@ public class ReservaController {
 
     @GetMapping("/consultar/{id}")
     public ReservaDto buscarReservaPorId(@PathVariable(name = "id") Long id) {
-        return  service.buscarReservaPorId(id);
+        return service.buscarReservaPorId(id);
+    }
+
+    @GetMapping("/consultar/codigo/{codigo}")
+    public ReservaDto buscarReservaPorCodigo(@PathVariable(name = "codigo") String codigo) {
+        return service.buscarReservaPorCodigo(codigo);
     }
 }
