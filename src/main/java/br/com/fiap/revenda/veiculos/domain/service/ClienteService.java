@@ -3,6 +3,7 @@ package br.com.fiap.revenda.veiculos.domain.service;
 import br.com.fiap.revenda.veiculos.domain.model.Contato;
 import br.com.fiap.revenda.veiculos.domain.model.Endereco;
 import br.com.fiap.revenda.veiculos.infrastructure.repository.ClienteRepository;
+import br.com.fiap.revenda.veiculos.presentation.Exception.ClienteException;
 import br.com.fiap.revenda.veiculos.presentation.assembler.ClienteAssembler;
 import br.com.fiap.revenda.veiculos.presentation.assembler.ContatoAssembler;
 import br.com.fiap.revenda.veiculos.presentation.assembler.EnderecoAssembler;
@@ -50,5 +51,11 @@ public class ClienteService {
             listaClienteDto.add(assembler.modeloParaDto(cliente));
         });
         return listaClienteDto;
+    }
+
+    public ClienteDto consultarPorId(Long id) throws ClienteException {
+        return repository.findById(id)
+                .map(assembler::modeloParaDto)
+                .orElseThrow(() -> new ClienteException("Cliente não cadastrado"));
     }
 }
