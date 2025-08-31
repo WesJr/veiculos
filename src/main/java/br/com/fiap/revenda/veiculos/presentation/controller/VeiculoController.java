@@ -21,6 +21,11 @@ public class VeiculoController {
         service.inserirVeiculo(veiculoDto);
     }
 
+    @PutMapping("/alterar")
+    public void atualizarVeiculo(@RequestBody VeiculoDto veiculoDto){
+        service.atualizarVeiculo(veiculoDto);
+    }
+
     @GetMapping("/listar/nao-vendidos")
     public List<VeiculoDto> getListaVeiculosAVendaPorPrecoCrescente(){
         return service.getListaVeiculosAVendaPorPreco();
