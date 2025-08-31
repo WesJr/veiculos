@@ -11,6 +11,9 @@ import br.com.fiap.revenda.veiculos.presentation.dto.ContatoDto;
 import br.com.fiap.revenda.veiculos.presentation.dto.EnderecoDto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ClienteService {
 
@@ -38,5 +41,14 @@ public class ClienteService {
         ContatoDto contatoDto = contatoAssembler.modeloParaDto(contato);
 
         repository.save(assembler.dtoParaModelo(clienteDto, enderecoDto, contatoDto));
+    }
+
+    public List<ClienteDto> listarTodosOsClientes() {
+        List<ClienteDto> listaClienteDto = new ArrayList<>();
+
+        repository.findAll().forEach(cliente -> {
+            listaClienteDto.add(assembler.modeloParaDto(cliente));
+        });
+        return listaClienteDto;
     }
 }

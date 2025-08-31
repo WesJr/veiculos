@@ -44,4 +44,32 @@ public class ClienteAssembler {
 
         return cliente;
     }
+
+    public ClienteDto modeloParaDto(Cliente cliente) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String nascimento = cliente.getNascimento().format(formatter);
+        ContatoDto contatoDto = new ContatoDto(
+                cliente.getContato().getId(),
+                cliente.getContato().getTelefone(),
+                cliente.getContato().getCelular(),
+                cliente.getContato().getEmail());
+
+        EnderecoDto enderecoDto = new EnderecoDto(
+                cliente.getEndereco().getId(),
+                cliente.getEndereco().getLogradouro(),
+                cliente.getEndereco().getNumero(),
+                cliente.getEndereco().getCidade(),
+                cliente.getEndereco().getUf(),
+                cliente.getEndereco().getCep());
+
+        return new ClienteDto(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getDocumento(),
+                nascimento,
+                cliente.getSexo(),
+                contatoDto,
+                enderecoDto
+                );
+    }
 }
