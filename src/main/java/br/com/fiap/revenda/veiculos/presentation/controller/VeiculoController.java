@@ -1,6 +1,7 @@
 package br.com.fiap.revenda.veiculos.presentation.controller;
 
 import br.com.fiap.revenda.veiculos.domain.service.VeiculoService;
+import br.com.fiap.revenda.veiculos.presentation.Exception.VeiculoException;
 import br.com.fiap.revenda.veiculos.presentation.dto.VeiculoDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,11 @@ public class VeiculoController {
     @PostMapping("/inserir")
     public void inserirVeiculo(@RequestBody VeiculoDto veiculoDto){
         service.inserirVeiculo(veiculoDto);
+    }
+
+    @GetMapping("/consultar/{id}")
+    public VeiculoDto consultarPorId(@PathVariable("id")Long id) throws VeiculoException {
+        return service.consultarPorId(id);
     }
 
     @PutMapping("/alterar")
