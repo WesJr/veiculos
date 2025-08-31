@@ -31,4 +31,12 @@ public class ReservaAssembler {
 
         return reserva;
     }
+
+    public ReservaDto modeloParaDto(Reserva reserva) {
+        return new ReservaDto(
+                reserva.getId(),
+                reserva.getCodigoReserva(),
+                clienteAssembler.modeloParaDto(reserva.getCliente()),
+                veiculoAssembler.modeloParaDto(reserva.getVeiculo()));
+    }
 }

@@ -2,9 +2,12 @@ package br.com.fiap.revenda.veiculos.domain.service;
 
 import br.com.fiap.revenda.veiculos.domain.model.Reserva;
 import br.com.fiap.revenda.veiculos.infrastructure.repository.ReservaRepository;
+import br.com.fiap.revenda.veiculos.presentation.Exception.ReservaException;
 import br.com.fiap.revenda.veiculos.presentation.assembler.ReservaAssembler;
 import br.com.fiap.revenda.veiculos.presentation.dto.ReservaDto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ReservaService {
@@ -19,7 +22,20 @@ public class ReservaService {
 
     public String reservar(ReservaDto reservaDto) {
 
-        Reserva reserva = repository.save(assembler.dtoParaModelo(reservaDto));
-        return reserva.getCodigoReserva();
+        Reserva reserva = assembler.dtoParaModelo(reservaDto);
+        List<Reserva> listaReservas = repository.findByVeiculo(reserva.getVeiculo());
+
+        if(!listaReservas.isEmpty()) {
+            throw new ReservaException("Veiculo já foi reservado");
+        } else {
+            Reserva reserva1 = repository.save(reserva);
+            return reserva1.getCodigoReserva();
+        }
+    }
+
+    public ReservaDto buscarReservaPorId(Long id) {
+        return repository.findById(id)
+                .map(assembler :: modeloParaDto)
+                .orElseThrow(() -> new ReservaException("Não foi possível encontrar a reserva"));
     }
 }
