@@ -11,4 +11,5 @@ import java.util.List;
 public interface VeiculoRepository extends CrudRepository<Veiculo, Long> {
 
     List<Veiculo> findByVendidoFalseOrderByPrecoAsc();
+    List<Veiculo> findByVendidoTrueOrderByPrecoAsc();
 }

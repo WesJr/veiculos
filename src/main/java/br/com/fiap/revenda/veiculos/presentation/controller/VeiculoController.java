@@ -28,6 +28,11 @@ public class VeiculoController {
 
     @GetMapping("/listar/nao-vendidos")
     public List<VeiculoDto> getListaVeiculosAVendaPorPrecoCrescente(){
-        return service.getListaVeiculosAVendaPorPreco();
+        return service.getListaVeiculosAVendaPorPrecoCresceste();
+    }
+
+    @GetMapping("/listar/vendidos")
+    public List<VeiculoDto> getListaVeiculosVendidosPorPrecoCrescente(){
+        return service.getListaVeiculosAVendidosPorPrecoCrescente();
     }
 }

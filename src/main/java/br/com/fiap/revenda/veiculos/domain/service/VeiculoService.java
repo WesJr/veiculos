@@ -26,9 +26,16 @@ public class VeiculoService {
         repository.save(assembler.dtoParaModelo(veiculoDto));
     }
 
-    public List<VeiculoDto> getListaVeiculosAVendaPorPreco() {
+    public List<VeiculoDto> getListaVeiculosAVendaPorPrecoCresceste() {
 
         return repository.findByVendidoFalseOrderByPrecoAsc()
+                .stream()
+                .map(assembler::modeloParaDto)
+                .toList();
+    }
+
+    public List<VeiculoDto> getListaVeiculosAVendidosPorPrecoCrescente() {
+        return repository.findByVendidoTrueOrderByPrecoAsc()
                 .stream()
                 .map(assembler::modeloParaDto)
                 .toList();
