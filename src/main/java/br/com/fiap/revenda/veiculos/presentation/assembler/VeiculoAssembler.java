@@ -19,4 +19,15 @@ public class VeiculoAssembler {
         return veiculo;
     }
 
+    public VeiculoDto modeloParaDto(Veiculo veiculo) {
+        return new VeiculoDto(
+                veiculo.getId(),
+                veiculo.getMarca(),
+                veiculo.getModelo(),
+                veiculo.getAno(),
+                veiculo.getCor(),
+                veiculo.getPreco(),
+                veiculo.getVendido());
+    }
+
 }

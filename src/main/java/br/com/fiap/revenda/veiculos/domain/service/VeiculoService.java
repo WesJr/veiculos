@@ -5,6 +5,8 @@ import br.com.fiap.revenda.veiculos.presentation.assembler.VeiculoAssembler;
 import br.com.fiap.revenda.veiculos.presentation.dto.VeiculoDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VeiculoService {
 
@@ -18,5 +20,17 @@ public class VeiculoService {
 
     public void inserirVeiculo(VeiculoDto veiculoDto) {
         repository.save(assembler.dtoParaModelo(veiculoDto));
+    }
+
+    public void atualizarVeiculo(VeiculoDto veiculoDto) {
+        repository.save(assembler.dtoParaModelo(veiculoDto));
+    }
+
+    public List<VeiculoDto> getListaVeiculosAVendaPorPreco() {
+
+        return repository.findByVendidoFalseOrderByPrecoAsc()
+                .stream()
+                .map(assembler::modeloParaDto)
+                .toList();
     }
 }
