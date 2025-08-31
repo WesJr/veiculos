@@ -9,5 +9,6 @@ public record VeiculoDto(
         Integer ano,
         String cor,
         BigDecimal preco,
-        Boolean vendido) {
+        Boolean vendido,
+        Boolean emEstoque) {
 }

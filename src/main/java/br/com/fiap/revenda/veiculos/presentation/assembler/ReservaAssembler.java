@@ -25,7 +25,8 @@ public class ReservaAssembler {
         Veiculo veiculo = veiculoAssembler.dtoParaModelo(reservaDto.veiculoDto());
 
         reserva.setId(reservaDto.id());
-        reserva.setCodigoReserva(UUID.randomUUID().toString());
+        reserva.setValorReserva(reservaDto.valorReserva());
+        reserva.setCodigoPagamento(UUID.randomUUID().toString());
         reserva.setCliente(cliente);
         reserva.setVeiculo(veiculo);
 
@@ -35,7 +36,8 @@ public class ReservaAssembler {
     public ReservaDto modeloParaDto(Reserva reserva) {
         return new ReservaDto(
                 reserva.getId(),
-                reserva.getCodigoReserva(),
+                reserva.getValorReserva(),
+                reserva.getCodigoPagamento(),
                 clienteAssembler.modeloParaDto(reserva.getCliente()),
                 veiculoAssembler.modeloParaDto(reserva.getVeiculo()));
     }

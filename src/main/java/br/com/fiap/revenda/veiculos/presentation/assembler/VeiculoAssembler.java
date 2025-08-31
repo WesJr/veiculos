@@ -16,6 +16,7 @@ public class VeiculoAssembler {
         veiculo.setCor(veiculoDto.cor());
         veiculo.setPreco(veiculoDto.preco());
         veiculo.setVendido(veiculoDto.vendido());
+        veiculo.setEmEstoque(veiculoDto.emEstoque());
         return veiculo;
     }
 
@@ -27,7 +28,8 @@ public class VeiculoAssembler {
                 veiculo.getAno(),
                 veiculo.getCor(),
                 veiculo.getPreco(),
-                veiculo.getVendido());
+                veiculo.getVendido(),
+                veiculo.getEmEstoque());
     }
 
 }

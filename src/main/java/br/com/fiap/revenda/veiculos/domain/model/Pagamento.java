@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "venda")
-public class Venda {
+@Table(name = "pagamento")
+public class Pagamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,9 @@ public class Venda {
 
     @Column(name = "data_venda")
     private LocalDateTime dataVenda;
+
+    @Column(name = "valor_remanescente")
+    private BigDecimal valorRemanescente;
 
     @OneToOne
     private Veiculo veiculo;

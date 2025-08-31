@@ -21,4 +21,7 @@ public class Veiculo {
     private String cor;
     private BigDecimal preco;
     private Boolean vendido;
+
+    @Column(name = "em_estoque")
+    private Boolean emEstoque;
 }
