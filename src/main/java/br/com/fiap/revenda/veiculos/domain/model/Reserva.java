@@ -14,6 +14,9 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "codigo_reserva")
+    private String codigoReserva;
+
     @ManyToOne
     private Cliente cliente;
 
