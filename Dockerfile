@@ -11,6 +11,9 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
+# Executa Flyway baseline e migrate
+RUN mvn flyway:baseline flyway:migrate
+
 # Etapa 2: Criar a imagem final (runtime stage)
 FROM eclipse-temurin:21-jdk-alpine
 
