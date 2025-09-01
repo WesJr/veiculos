@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -14,8 +16,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_reserva")
-    private String codigoReserva;
+    @Column(name = "valor_reserva")
+    private BigDecimal valorReserva;
+
+    @Column(name = "codigo_pagamento")
+    private String codigoPagamento;
 
     @ManyToOne
     private Cliente cliente;

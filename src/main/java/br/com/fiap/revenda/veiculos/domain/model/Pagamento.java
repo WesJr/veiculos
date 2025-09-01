@@ -1,16 +1,18 @@
 package br.com.fiap.revenda.veiculos.domain.model;
 
+import br.com.fiap.revenda.veiculos.presentation.enumerado.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "venda")
-public class Venda {
+@Table(name = "pagamento")
+public class Pagamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +21,11 @@ public class Venda {
     @Column(name = "data_venda")
     private LocalDateTime dataVenda;
 
-    @OneToOne
-    private Veiculo veiculo;
+    @Column(name = "valor_remanescente")
+    private BigDecimal valorRemanescente;
 
-    @OneToOne
-    private Cliente cliente;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column(name = "codigo_pagamento")
     private String codigoPagamento;
