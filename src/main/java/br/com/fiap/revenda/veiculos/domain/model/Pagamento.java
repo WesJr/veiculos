@@ -1,5 +1,6 @@
 package br.com.fiap.revenda.veiculos.domain.model;
 
+import br.com.fiap.revenda.veiculos.presentation.enumerado.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +24,8 @@ public class Pagamento {
     @Column(name = "valor_remanescente")
     private BigDecimal valorRemanescente;
 
-    @OneToOne
-    private Veiculo veiculo;
-
-    @OneToOne
-    private Cliente cliente;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column(name = "codigo_pagamento")
     private String codigoPagamento;

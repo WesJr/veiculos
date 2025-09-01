@@ -40,8 +40,12 @@ public class ReservaService {
     }
 
     public ReservaDto buscarReservaPorCodigo(String codigo) {
-        return repository.findByCodigoPagamento(codigo)
-                .map(assembler :: modeloParaDto)
-                .orElseThrow(() -> new ReservaException("Não foi possível encontrar a reserva"));
+        if (repository.findByCodigoPagamento(codigo).isPresent()) {
+            return repository.findByCodigoPagamento(codigo)
+                    .map(assembler::modeloParaDto).get();
+
+        } else {
+            return null;
+        }
     }
 }
