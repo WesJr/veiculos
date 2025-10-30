@@ -1,5 +1,6 @@
 package br.com.fiap.revenda.veiculos.domain.service;
 
+import br.com.fiap.revenda.veiculos.domain.model.Veiculo;
 import br.com.fiap.revenda.veiculos.infrastructure.repository.VeiculoRepository;
 import br.com.fiap.revenda.veiculos.presentation.Exception.VeiculoException;
 import br.com.fiap.revenda.veiculos.presentation.assembler.VeiculoAssembler;
@@ -7,6 +8,7 @@ import br.com.fiap.revenda.veiculos.presentation.dto.VeiculoDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VeiculoService {
@@ -46,5 +48,12 @@ public class VeiculoService {
         return repository.findById(id)
                 .map(assembler::modeloParaDto)
                 .orElseThrow(() -> new VeiculoException("Veículo não encontrado"));
+    }
+
+    public void atualizarParaVendido(Long veiculoId) {
+        VeiculoDto veiculoDto = consultarPorId(veiculoId);
+        Veiculo veiculo = assembler.dtoParaModelo(veiculoDto);
+        veiculo.setVendido(true);
+        repository.save(veiculo);
     }
 }

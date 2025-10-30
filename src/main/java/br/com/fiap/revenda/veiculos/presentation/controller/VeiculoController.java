@@ -41,4 +41,9 @@ public class VeiculoController {
     public List<VeiculoDto> getListaVeiculosVendidosPorPrecoCrescente(){
         return service.getListaVeiculosAVendidosPorPrecoCrescente();
     }
+
+    @PutMapping("vendido/{veiculoId}")
+    public void atualizarParaVendido(@PathVariable("veiculoId") Long veiculoId) {
+        service.atualizarParaVendido(veiculoId);
+    }
 }
